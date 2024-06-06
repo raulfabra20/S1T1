@@ -67,14 +67,10 @@ public class Aplicacio {
     }
 
     public static void introduirRedactor(Redaccio redaccio) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Introdeuix el DNI del redactor/a:");
-        String dni = sc.nextLine();
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor == null) {
-            System.out.println("Introdeuix el nom del redactor/a:");
-            String nom = sc.nextLine();
+            String nom = demanarNomRedactor();
             redactor = new Redactor(nom, dni);
             redaccio.afegirRedactor(redactor);
             System.out.println("Redactor registrat amb èxit.");
@@ -82,12 +78,23 @@ public class Aplicacio {
             System.out.println("Aquest redactor ja està registrat al sistema.");
         }
     }
-
-    public static void eliminarRedactor(Redaccio redaccio) {
+    public static String demanarDni(){
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Introdeuix el DNI del redactor/a:");
         String dni = sc.nextLine();
+        return dni;
+    }
+    public static String demanarNomRedactor(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introdeuix el nom del redactor/a:");
+        String nom = sc.nextLine();
+        return nom;
+
+    }
+
+    public static void eliminarRedactor(Redaccio redaccio) {
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor != null) {
             redaccio.eliminarRedactor(redactor);
@@ -96,50 +103,64 @@ public class Aplicacio {
             System.out.println("Aquest redactor no està registrat al sistema.");
         }
     }
+    public static String demanarTitularNoticia(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introdeuix el titular de la notícia:");
+        String titular = sc.nextLine();
+        return titular;
+    }
+    public static String demanarTextNoticia(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introdeuix el text de la notícia:");
+        String text = sc.nextLine();
+        return text;
+    }
 
     public static void introduirNoticia(Redaccio redaccio) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Introdeuix el DNI del redactor/a:");
-        String dni = sc.nextLine();
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor != null) {
-            System.out.println("Introdeuix el titular de la notícia:");
-            String titular = sc.nextLine();
+            String titular = demanarTitularNoticia();
             Noticia noticia = redactor.buscarNoticia(titular);
             if (noticia == null) {
-                System.out.println("Introdeuix el text de la notícia:");
-                String text = sc.nextLine();
-                System.out.println(
-                        "De quin esport tracta la notícia? Escull una opció: (1. Futbol, 2. Bàsquet, 3.Tenis, 4. F1, 5.Motociclisme)");
-                byte opcio = sc.nextByte();
-                sc.nextLine();
-                switch (opcio) {
-                    case 1:
-                        afegirNoticiaFutbol(redactor, titular, text);
-                        break;
-                    case 2:
-                        afegirNoticiaBasquet(redactor, titular, text);
-                        break;
-                    case 3:
-                        afegirNoticiaTenis(redactor, titular, text);
-                        break;
-                    case 4:
-                        afegirNoticiaF1(redactor, titular, text);
-                        break;
-                    case 5:
-                        afegirNoticiaMotociclisme(redactor, titular, text);
-                        break;
-                    default:
-                        System.out.println("Escull una opció vàlida.");
-                        break;
-
-                }
+                String text = demanarTextNoticia();
+                Byte opcio = demanarTipusNoticia();
+                menuAfegirNoticia(opcio, redactor, titular, text);
             } else {
                 System.out.println("Aquesta notícia ja està registrada.");
             }
         } else {
             System.out.println("Aquest redactor no està registrat al sistema.");
+        }
+    }
+    public static byte demanarTipusNoticia(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println(
+                "De quin esport tracta la notícia? Escull una opció: (1. Futbol, 2. Bàsquet, 3.Tenis, 4. F1, 5.Motociclisme)");
+        byte opcio = sc.nextByte();
+        return opcio;
+    }
+    public static void menuAfegirNoticia(byte opcio, Redactor redactor, String titular, String text){
+        switch (opcio) {
+            case 1:
+                afegirNoticiaFutbol(redactor, titular, text);
+                break;
+            case 2:
+                afegirNoticiaBasquet(redactor, titular, text);
+                break;
+            case 3:
+                afegirNoticiaTenis(redactor, titular, text);
+                break;
+            case 4:
+                afegirNoticiaF1(redactor, titular, text);
+                break;
+            case 5:
+                afegirNoticiaMotociclisme(redactor, titular, text);
+                break;
+            default:
+                System.out.println("Escull una opció vàlida.");
+                break;
+
         }
     }
 
@@ -202,14 +223,10 @@ public class Aplicacio {
     }
 
     public static void eliminarNoticia(Redaccio redaccio) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Introdeuix el DNI del redactor/a:");
-        String dni = sc.nextLine();
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor != null) {
-            System.out.println("Introdeuix el titular de la notícia:");
-            String titular = sc.nextLine();
+            String titular = demanarTitularNoticia();
             Noticia noticia = redactor.buscarNoticia(titular);
             if (noticia != null) {
                 redactor.eliminarNoticia(noticia);
@@ -224,10 +241,7 @@ public class Aplicacio {
     }
 
     public static void mostrarNoticiesRedactor(Redaccio redaccio) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Introdeuix el DNI del redactor/a:");
-        String dni = sc.nextLine();
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor != null) {
             redactor.mostrarNoticies();
@@ -237,14 +251,10 @@ public class Aplicacio {
     }
 
     public static void mostrarPuntuacioNoticia (Redaccio redaccio) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Introdeuix el DNI del redactor/a:");
-        String dni = sc.nextLine();
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor != null) {
-            System.out.println("Introdeuix el titular de la notícia:");
-            String titular = sc.nextLine();
+            String titular = demanarTitularNoticia();
             Noticia noticia = redactor.buscarNoticia(titular);
             if (noticia != null) {
                 System.out.println("La puntuació de la notícia és de: "+noticia.getPuntuacio());
@@ -257,14 +267,10 @@ public class Aplicacio {
     }
 
     public static void mostrarPreuNoticia (Redaccio redaccio) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Introdeuix el DNI del redactor/a:");
-        String dni = sc.nextLine();
+        String dni = demanarDni();
         Redactor redactor = redaccio.buscarRedactor(dni);
         if (redactor != null) {
-            System.out.println("Introdeuix el titular de la notícia:");
-            String titular = sc.nextLine();
+            String titular = demanarTitularNoticia();
             Noticia noticia = redactor.buscarNoticia(titular);
             if (noticia != null) {
                 System.out.println("El preu de la notícia és de: "+noticia.getPreu()+" €.");

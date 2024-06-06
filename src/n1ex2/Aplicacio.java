@@ -11,7 +11,7 @@ public class Aplicacio {
         Cotxe cotxe1 = new Cotxe("Micra", 110);
 
 
-        System.out.println(cotxe1.getMarca()+", "+cotxe1.getModel()+", "+ cotxe1.getPotencia());
+        System.out.println(cotxe1.toString());
 
         cotxe1.accelerar();
 

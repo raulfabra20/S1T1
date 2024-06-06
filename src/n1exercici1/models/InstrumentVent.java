@@ -8,8 +8,11 @@ public class InstrumentVent extends Instrument {
 
     }
 
-    public void tocar() {
+    public  void tocar() {
         System.out.println("Està sonant un instrument de vent.");
 
+    }
+    public static void metodeTocarEstatic(){
+        System.out.println("Està sonant un instrument de vent.");
     }
 }

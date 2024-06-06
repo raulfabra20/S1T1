@@ -7,8 +7,13 @@ public class InstrumentPercussio extends Instrument {
 
     }
 
-    public  void tocar() {
+    public void tocar() {
         System.out.println("Està sonant un instrument de percussió.");
 
     }
+
+    public static void metodeTocarEstatic(){
+        System.out.println("Està sonant un instrument de percussió.");
+    }
+
 }

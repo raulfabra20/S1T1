@@ -28,6 +28,10 @@ public abstract class Instrument {
 
     protected abstract void tocar();
 
+    public static void metodeTocarEstatic(){
+
+    }
+
 
 }
 

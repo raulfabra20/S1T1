@@ -33,5 +33,12 @@ public class Cotxe {
         System.out.println("El vehícle està accelerant.");
     }
 
+    @Override
+    public String toString() {
+        return "Cotxe{" + "Marca = " + marca +
+                ", Model = " + model +
+                ", Potencia = " + potencia +
+                '}';
+    }
 }
 

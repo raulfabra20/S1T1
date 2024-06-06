@@ -12,5 +12,8 @@ public class InstrumentCorda extends Instrument {
         System.out.println("Està sonant un instrument de corda.");
 
     }
+    public static void metodeTocarEstatic(){
+        System.out.println("Està sonant un instrument de percussió.");
+    }
 
 }
